@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: "yesod-demo"
+spec:
+  selector:
+    app: "yesod-demo"
+  ports:
+    - protocol: "TCP"
+      port: 3100
+      targetPort: 3000
+      nodePort: 31000
+  type: NodePort

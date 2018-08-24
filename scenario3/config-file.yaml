@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  yesod_static_path: /app/static
+  yesod_db_name: yesod-test
+  yesod_db_port: "5432"
+  yesod_host_name: donating-possum-postgresql
+kind: ConfigMap
+metadata:
+  name: yesod-config
+

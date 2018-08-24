@@ -1,0 +1,46 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: yesod-demo
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: yesod-demo
+        track: stable
+    spec:
+      containers:
+        - name: yesod-demo
+          image: "psibi/yesod-demo:3.0-yesod-demo"
+          env:
+            - name: YESOD_STATIC_DIR
+              valueFrom:
+                configMapKeyRef:
+                  name: yesod-config
+                  key: yesod_static_path
+            - name: YESOD_PGPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: yesod-config
+                  key: yesod_db_port
+            - name: YESOD_PGHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: yesod-config
+                  key: yesod_host_name
+            - name: YESOD_PGDATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: yesod-config
+                  key: yesod_db_name
+            - name: YESOD_PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: yesod-secret
+                  key: yesod-db-user
+            - name: YESOD_PGPASS
+              valueFrom:
+                secretKeyRef:
+                  name: yesod-secret
+                  key: yesod-db-password

@@ -1,0 +1,17 @@
+resolver: lts-12.5
+
+packages:
+- .
+
+image:
+  container:
+    name: psibi/yesod-demo:4.0
+    base: fpco/stack-build
+    add:
+      static: /app/static
+    
+    entrypoints:
+    - yesod-demo
+
+docker:
+  enable: true
